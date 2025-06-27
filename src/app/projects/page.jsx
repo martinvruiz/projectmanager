@@ -4,8 +4,10 @@ import Modal from "@/components/Modal";
 import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
 import { useStore } from "@/stores/useStore";
+import { showSuccessToast } from "@/toasts/showSuccesToast";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Projects() {
   const profile = useStore((state) => state.profile);
@@ -21,18 +23,30 @@ export default function Projects() {
     await addProject(projectName);
     setModalOpen(false);
     setProjectName("");
+    showSuccessToast("Project created successfully");
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-200 text-gray-800 md:pt-24 pt-8">
-      <Navbar />
+    <div className="w-full min-h-screen h-auto bg-gray-200 text-gray-800 md:pt-24 pt-4 md:pb-10 pb-24">
       <div className="flex flex-col items-center justify-center h-full">
         <div className="flex flex-col items-center text-center mx-auto">
-          <h2 className="text-2xl font-bold">Your projects</h2>
+          <h2 className="text-2xl font-bold">
+            {profile?.full_name ? (
+              <p>{profile.full_name}'s projects</p>
+            ) : (
+              <p>Your projects</p>
+            )}
+          </h2>
           {profile ? (
             <div>
               {projectsList.length > 0 ? (
                 <div>
+                  <div className="mt-6">
+                    <Button
+                      title="+ New Project"
+                      onClick={() => setModalOpen(true)}
+                    />
+                  </div>
                   <ul className="list-none mt-2 p-4">
                     {projectsList.map((project, index) => (
                       <li key={index} className="text-lg">
@@ -42,10 +56,6 @@ export default function Projects() {
                       </li>
                     ))}
                   </ul>
-                  <Button
-                    title="+ New Project"
-                    onClick={() => setModalOpen(true)}
-                  />
                 </div>
               ) : (
                 <div>
@@ -66,7 +76,7 @@ export default function Projects() {
               </h4>
               <div className=" pt-3">
                 <Link href={"/account"}>
-                  <Button title={"Go to account"} />
+                  <Button title={"Go to profile"} />
                 </Link>
               </div>
             </div>

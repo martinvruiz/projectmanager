@@ -1,15 +1,8 @@
-import { Geist, Geist_Mono, Manrope } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Initializer from "@/components/Initializer";
+import Navbar from "@/components/Navbar";
+import { ToastContainer } from "react-toastify";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -26,6 +19,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${manrope.className} antialiased w-screen min-h-screen bg-gray-400 text-black`}
       >
+        <Initializer />
+        <Navbar />
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          toastStyle={{ position: "fixed", zIndex: 9999 }}
+        />
         {children}
       </body>
     </html>

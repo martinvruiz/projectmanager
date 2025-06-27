@@ -8,6 +8,8 @@ import Navbar from "@/components/Navbar";
 import TaskCard from "@/components/TaskCard";
 import ViewTask from "@/components/ViewTask";
 import { useStore } from "@/stores/useStore";
+import { showSuccessToast } from "@/toasts/showSuccesToast";
+import { toastConfirmDelete } from "@/toasts/showToastConfirmDelete";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -48,6 +50,20 @@ export default function ProjectDetail() {
       priority: "low",
     });
     setModalOpen(false);
+    showSuccessToast("Task created successfully");
+  };
+
+  const handleDeleteProject = (project) => {
+    if (!project) return;
+
+    toastConfirmDelete(project.name, async () => {
+      try {
+        await deleteProject(project.id);
+        showSuccessToast("Project deleted successfully");
+      } catch (error) {
+        console.error(error);
+      }
+    });
   };
 
   if (!project) {
@@ -90,15 +106,17 @@ export default function ProjectDetail() {
   const handleDeleteTask = async () => {
     if (!selectedTask) return;
 
-    await deleteTaskInProject(project.id, selectedTask.id);
+    toastConfirmDelete(selectedTask.name, async () => {
+      await deleteTaskInProject(project.id, selectedTask.id);
+      showSuccessToast("Task deleted");
+    });
 
     setTaskModal(false);
   };
 
   return (
-    <div className="max-w-full min-h-screen bg-gray-200 text-gray-800 overflow-x-hidden">
-      <Navbar />
-      <div className="md:pt-24 pt-8 flex flex-col items-center w-full">
+    <div className="max-w-full min-h-screen bg-gray-200 text-gray-800 overflow-x-hidden pb-24 md:pb-10">
+      <div className="md:pt-24 pt-4 flex flex-col items-center w-full">
         <h2 className="text-xl md:text-3xl font-bold text-center">
           {project.name}
         </h2>
@@ -109,8 +127,11 @@ export default function ProjectDetail() {
           <div className="flex flex-col items-center text-center">
             <h3 className="text-lg font-semibold">Tasks for: {project.name}</h3>
             <div className="w-full max-w-lg flex flex-col items-center px-2">
+              <div className="mt-4">
+                <Button title={"Add task"} onClick={() => setModalOpen(true)} />
+              </div>
               {project.tasks.length > 0 ? (
-                <div className="flex flex-col justify-center">
+                <div className="flex flex-col justify-center my-4">
                   {project.tasks.map((task, index) => (
                     <button key={index} onClick={() => handleSelectTask(task)}>
                       <TaskCard task={task} />
@@ -129,14 +150,13 @@ export default function ProjectDetail() {
                   </div>
                 </div>
               )}
-              <Button title={"Add task"} onClick={() => setModalOpen(true)} />
             </div>
           </div>
-          <div className="flex flex-col items-center my-4">
+          <div className="flex flex-col items-center ">
             <Link href={`/projects`}>
               <Button
                 title={"Delete project"}
-                onClick={() => deleteProject(id)}
+                onClick={() => handleDeleteProject(project)}
               />
             </Link>
           </div>

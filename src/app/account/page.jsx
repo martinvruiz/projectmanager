@@ -6,6 +6,8 @@ import UserProfile from "../pages/UserProfile";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import Button from "@/components/Button";
+import { showSuccessToast } from "@/toasts/showSuccesToast";
+import { toast } from "react-toastify";
 
 export default function Account() {
   const user = useStore((state) => state.profile);
@@ -19,20 +21,19 @@ export default function Account() {
     }
     logIn(email, password);
     if (error) {
-      alert(error);
-    } else {
+      toast.warn(error);
+      return;
     }
   };
   return (
     <div className="w-full min-h-screen bg-gray-200 text-gray-800">
-      <Navbar />
-      <div className="md:pt-24 pt-8 flex flex-col items-center w-full">
+      <div className="md:pt-24 flex flex-col items-center w-full">
         {user ? (
           <UserProfile />
         ) : (
           <div className="w-full min-h-screen bg-gray-200 text-gray-800">
             <div className="flex flex-col items-center w-full">
-              <h3 className="md:text-3xl font-bold">Log in</h3>
+              <h3 className="md:text-3xl text-xl font-bold">Log in</h3>
               <div className="flex flex-col items-center">
                 <input
                   type="text"

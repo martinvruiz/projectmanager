@@ -19,8 +19,7 @@ export function useAuth() {
       if (error) {
         setError(error.message);
       } else {
-        alert("check your email for confirmation link");
-        router.push("/account/login");
+        router.push("/account");
       }
     } catch (err) {
       console.error("error signing up:", err);

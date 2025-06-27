@@ -3,8 +3,10 @@ import Button from "@/components/Button";
 import Navbar from "@/components/Navbar";
 import { useAuth } from "@/hooks/useAuth";
 import { useStore } from "@/stores/useStore";
+import { showSuccessToast } from "@/toasts/showSuccesToast";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const { signUp, loading, error } = useAuth();
@@ -18,15 +20,14 @@ export default function SignUp() {
     }
     signUp(email, password);
     if (error) {
-      alert("Error signing up, try later.");
+      toast.warning(error);
     } else {
-      alert("Check your email for confirmation");
+      showSuccessToast("Check your email for confirmation link");
     }
   };
 
   return (
     <div className="w-full min-h-screen bg-gray-200 text-gray-800">
-      <Navbar />
       <div className="md:pt-24 pt-8 flex flex-col items-center w-full">
         <h3 className="md:text-3xl font-bold">Sign up</h3>
         <div className="flex flex-col items-center">

@@ -1,6 +1,10 @@
 import Button from "@/components/Button";
+import ChangeName from "@/components/ChangeName";
+import Modal from "@/components/Modal";
+import Stadistics from "@/components/Stadistics";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
+import { useStadistics } from "@/hooks/useStadistics";
 import { useState, useEffect } from "react";
 
 export default function UserProfile() {
@@ -9,6 +13,8 @@ export default function UserProfile() {
   const [name, setName] = useState("");
   const [updating, setUpdating] = useState(false);
   const [message, setMessage] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const stadistics = useStadistics();
 
   useEffect(() => {
     if (profile?.full_name) {
@@ -31,49 +37,38 @@ export default function UserProfile() {
       setMessage("Error updating profile");
     }
     setUpdating(false);
+    setModalOpen(false);
   };
 
   return (
     <div className="flex flex-col items-center w-full max-w-md mx-auto p-4">
-      <h3 className="md:text-2xl">
+      <h3 className="md:text-2xl text-xl">
         Bienvenido{" "}
-        <span className="font-bold">{profile.full_name || "Usuario"}</span>!
+        <span className="font-bold">{profile?.full_name || "Usuario"}</span>!
       </h3>
       <p className="py-2 text-gray-700">
         Created at:{" "}
         <span className="font-semibold">
-          {new Date(profile.created_at).toLocaleDateString()}
+          {new Date(profile?.created_at).toLocaleDateString()}
         </span>
       </p>
 
-      <p className="mb-6">
-        {profile.full_name
+      <p className="mb-2 text-center">
+        {profile?.full_name
           ? "This is your profile, here you can track your tasks and projects."
           : "Please complete your profile by entering your full name."}
       </p>
-
-      <div className="w-full flex flex-col items-center">
-        <label htmlFor="nameInput" className="block text-gray-700 mb-2">
-          Update name
-        </label>
-        <input
-          id="nameInput"
-          type="text"
-          placeholder="Enter full name"
-          className="border border-gray-300 bg-white rounded px-3 py-2 w-full mb-4"
-          value={name}
-          autoComplete="name"
-          onChange={(e) => setName(e.target.value)}
-          disabled={updating}
-        />
-        <Button
-          title={updating ? "Updating..." : "Save Profile"}
-          onClick={handleUpdateProfile}
-          disabled={updating}
-        />
+      <div>
+        {profile ? (
+          <div>
+            <Stadistics stadistics={stadistics} />
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
-
-      <div className="py-2">
+      <div className="py-2 gap-3 flex flex-col justify-center items-center">
+        <Button title={"Change name"} onClick={() => setModalOpen(true)} />
         <Button title={"Log out"} onClick={() => logOut()} />
       </div>
 
@@ -86,6 +81,15 @@ export default function UserProfile() {
           {message}
         </p>
       )}
+
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        <ChangeName
+          name={name}
+          onChange={(e) => setName(e.target.value)}
+          updating={updating}
+          onClickButton={() => handleUpdateProfile()}
+        />
+      </Modal>
     </div>
   );
 }
