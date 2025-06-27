@@ -43,7 +43,7 @@ export default function UserProfile() {
   return (
     <div className="flex flex-col items-center w-full max-w-md mx-auto p-4">
       <h3 className="md:text-2xl text-xl">
-        Bienvenido{" "}
+        Welcome{" "}
         <span className="font-bold">{profile?.full_name || "Usuario"}</span>!
       </h3>
       <p className="py-2 text-gray-700">
