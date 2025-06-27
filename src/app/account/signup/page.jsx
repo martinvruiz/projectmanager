@@ -22,7 +22,7 @@ export default function SignUp() {
     if (error) {
       toast.warning(error);
     } else {
-      showSuccessToast("Check your email for confirmation link");
+      showSuccessToast("Check your inbox or spam for confirmation link");
     }
   };
 
