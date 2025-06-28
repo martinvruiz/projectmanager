@@ -85,7 +85,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_KEY=your-key
 ```
 
-4. **Start the development serve**
+4. **Start the development server**
 
 ```bash
 npm run dev
