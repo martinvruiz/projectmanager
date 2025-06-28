@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Features
 
-## Getting Started
+### Authentication
 
-First, run the development server:
+- User registration and login using Supabase Auth.
+- Session persistence across page reloads.
+- Profile page with editable full name.
+- Secure logout with toast feedback.
+
+### Project Management
+
+- Create new projects.
+- View your personal list of projects.
+- View project details.
+- Delete projects with confirmation prompts.
+- Real-time UI updates after changes.
+
+### Task Management
+
+- Add tasks to a project using a modal.
+- Edit tasks: name, description, priority, and status.
+- Delete tasks with confirmation.
+- View and update tasks directly in a modal.
+- All data synced with Supabase and local state.
+
+### Dashboard Statistics
+
+- Total number of projects.
+- Total number of tasks.
+- Task breakdown by status: Pending, In Process, Done.
+- Overall progress percentage.
+- Displayed in a clean and responsive widget.
+
+### User Experience
+
+- Responsive design for desktop and mobile.
+- Reusable modal components for tasks.
+- Custom toast notifications for all actions.
+- Fixed minimalist Navbar layout.
+- Modern UI with Tailwind CSS.
+- Google Fonts (Manrope, Geist) integration.
+
+### State Management
+
+- Global state handled with Zustand.
+- Local state synced with Supabase database.
+- Modular structure for profile, projects, and tasks.
+
+---
+
+## Tech Stack
+
+- Framework: [Next.js](https://nextjs.org/)
+- Styling: [Tailwind CSS](https://tailwindcss.com/)
+- State Management: [Zustand](https://zustand-demo.pmnd.rs/)
+- Backend & Auth: [Supabase](https://supabase.com/)
+- Notifications: [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
+- Fonts: [Google Fonts (Manrope, Geist)](https://fonts.google.com/)
+
+---
+
+# Installation
+
+Follow these steps to run the project locally:
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/martinvruiz/projectmanager
+cd projectmanager
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Set up environment variables**
+
+Create a `.env.local` file in the root directory and add your Supabase credentials:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_KEY=your-key
+```
+
+4. **Start the development serve**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
