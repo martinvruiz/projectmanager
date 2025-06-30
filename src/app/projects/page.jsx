@@ -44,7 +44,7 @@ export default function Projects() {
                 <div>
                   <div className="mt-6">
                     <Button
-                      title="+ New Project"
+                      title="+ New project"
                       onClick={() => setModalOpen(true)}
                     />
                   </div>
@@ -56,7 +56,7 @@ export default function Projects() {
                     You have no projects yet. Start by creating one!
                   </p>
                   <Button
-                    title="+ New Project"
+                    title="+ New project"
                     onClick={() => setModalOpen(true)}
                   />
                 </div>

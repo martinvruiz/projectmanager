@@ -17,7 +17,7 @@ export default function Modal({ children, onClose, isOpen }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.15 }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -25,7 +25,7 @@ export default function Modal({ children, onClose, isOpen }) {
               onClick={onClose}
               aria-label="Close modal"
             >
-              ×
+              X
             </button>
             <div className="py-4">{children}</div>
           </motion.div>
