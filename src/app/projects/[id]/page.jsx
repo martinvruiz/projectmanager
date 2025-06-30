@@ -10,6 +10,7 @@ import ViewTask from "@/components/ViewTask";
 import { useStore } from "@/stores/useStore";
 import { showSuccessToast } from "@/toasts/showSuccesToast";
 import { toastConfirmDelete } from "@/toasts/showToastConfirmDelete";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -132,11 +133,22 @@ export default function ProjectDetail() {
               </div>
               {project.tasks.length > 0 ? (
                 <div className="flex flex-col justify-center my-4">
-                  {project.tasks.map((task, index) => (
-                    <button key={index} onClick={() => handleSelectTask(task)}>
-                      <TaskCard task={task} />
-                    </button>
-                  ))}
+                  <AnimatePresence>
+                    {project.tasks.map((task) => (
+                      <motion.button
+                        key={task.id}
+                        onClick={() => handleSelectTask(task)}
+                        className="w-full text-left focus:outline-none"
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        layout
+                      >
+                        <TaskCard task={task} />
+                      </motion.button>
+                    ))}
+                  </AnimatePresence>
                 </div>
               ) : (
                 <div>

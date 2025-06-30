@@ -2,6 +2,7 @@
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import Navbar from "@/components/Navbar";
+import ProjectList from "@/components/ProjecList";
 import ProjectCard from "@/components/ProjectCard";
 import { useStore } from "@/stores/useStore";
 import { showSuccessToast } from "@/toasts/showSuccesToast";
@@ -47,15 +48,7 @@ export default function Projects() {
                       onClick={() => setModalOpen(true)}
                     />
                   </div>
-                  <ul className="list-none mt-2 p-4">
-                    {projectsList.map((project, index) => (
-                      <li key={index} className="text-lg">
-                        <Link href={`/projects/${project.id}`}>
-                          <ProjectCard project={project} />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <ProjectList projectsList={projectsList} />
                 </div>
               ) : (
                 <div>
