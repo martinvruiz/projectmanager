@@ -38,7 +38,7 @@ export default function ViewTask({ task, editTask, deleteTask }) {
           </span>
         </p>
       </div>
-      <div className="flex flex-row items-center justify-center mt-4 space-x-4">
+      <div className="flex flex-col items-center justify-center space-y-2">
         <Button title={"Edit task"} onClick={editTask} />
         <Button title={"Delete task"} onClick={deleteTask} />
       </div>
