@@ -116,64 +116,66 @@ export default function ProjectDetail() {
   };
 
   return (
-    <div className="max-w-full min-h-screen bg-gray-200 text-gray-800 overflow-x-hidden pb-24 md:pb-10">
-      <div className="md:pt-24 pt-4 flex flex-col items-center w-full">
-        <h2 className="text-xl md:text-3xl font-bold text-center">
+    <div className="min-h-screen bg-gray-100 text-gray-800 pb-28 md:pb-16 overflow-x-hidden">
+      <div className="pt-6 md:pt-24 px-4 md:px-0 flex flex-col items-center w-full">
+        <h2 className="text-2xl md:text-4xl font-bold text-center">
           {project.name}
         </h2>
-        <div>
-          <p className="md:text-lg text-gray-600 my-2 text-center">
-            Created: {new Date(project.created_at).toLocaleDateString()}
-          </p>
-          <div className="flex flex-col items-center text-center">
-            <h3 className="text-lg font-semibold">Tasks for: {project.name}</h3>
-            <div className="w-full max-w-lg flex flex-col items-center px-2">
-              <div className="mt-4">
-                <Button title={"Add task"} onClick={() => setModalOpen(true)} />
+
+        <p className="text-sm md:text-base text-gray-500 mt-2">
+          Created: {new Date(project.created_at).toLocaleDateString()}
+        </p>
+
+        <div className="w-full max-w-3xl mt-6 bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
+          <div className="flex flex-col items-center gap-4">
+            <h3 className="text-lg font-semibold text-gray-700 text-center">
+              Tasks for: {project.name}
+            </h3>
+
+            <Button title="Add task" onClick={() => setModalOpen(true)} />
+
+            {project.tasks.length > 0 ? (
+              <div className="w-full flex flex-col gap-2 mt-4">
+                <AnimatePresence>
+                  {project.tasks.map((task) => (
+                    <motion.button
+                      key={task.id}
+                      onClick={() => handleSelectTask(task)}
+                      className="w-full text-left focus:outline-none"
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      layout
+                    >
+                      <TaskCard task={task} />
+                    </motion.button>
+                  ))}
+                </AnimatePresence>
               </div>
-              {project.tasks.length > 0 ? (
-                <div className="flex flex-col justify-center my-4">
-                  <AnimatePresence>
-                    {project.tasks.map((task) => (
-                      <motion.button
-                        key={task.id}
-                        onClick={() => handleSelectTask(task)}
-                        className="w-full text-left focus:outline-none"
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                        transition={{ duration: 0.15 }}
-                        layout
-                      >
-                        <TaskCard task={task} />
-                      </motion.button>
-                    ))}
-                  </AnimatePresence>
-                </div>
-              ) : (
-                <div>
-                  <p className="md:text-lg text-gray-600 my-3">
-                    No tasks available for this project.
-                  </p>
-                  <div className="bg-white shadow-md rounded-lg p-4 mb-2 md:min-w-xl">
-                    <p className="text-gray-600 py-2">
-                      You can add tasks later.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="flex flex-col items-center ">
-            <Link href={`/projects`}>
-              <Button
-                title={"Delete project"}
-                onClick={() => handleDeleteProject(project)}
-              />
-            </Link>
+            ) : (
+              <div className="w-full mt-6 bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
+                <p className="text-gray-500">
+                  No tasks available for this project.
+                </p>
+                <p className="text-sm text-gray-400 mt-1">
+                  You can add tasks later.
+                </p>
+              </div>
+            )}
           </div>
         </div>
+
+        <div className="mt-6">
+          <Link href="/projects">
+            <Button
+              title="Delete project"
+              onClick={() => handleDeleteProject(project)}
+            />
+          </Link>
+        </div>
       </div>
+
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <AddTask
           task={task}
@@ -189,6 +191,7 @@ export default function ProjectDetail() {
           onClick={() => handleAddTask()}
         />
       </Modal>
+
       <Modal isOpen={taskModal} onClose={() => setTaskModal(false)}>
         {isEditing ? (
           <EditTask

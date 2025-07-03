@@ -41,46 +41,56 @@ export default function UserProfile() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full max-w-md mx-auto p-4">
-      <h3 className="md:text-2xl text-xl">
-        Welcome{" "}
-        <span className="font-bold">{profile?.full_name || "Usuario"}</span>!
-      </h3>
-      <p className="py-2 text-gray-700">
-        Created at:{" "}
-        <span className="font-semibold">
-          {new Date(profile?.created_at).toLocaleDateString()}
-        </span>
-      </p>
-
-      <p className="mb-2 text-center">
-        {profile?.full_name
-          ? "This is your profile, here you can track your tasks and projects."
-          : "Please complete your profile by entering your full name."}
-      </p>
-      <div>
-        {profile ? (
-          <div>
-            <Stadistics stadistics={stadistics} />
-          </div>
-        ) : (
-          <div></div>
-        )}
-      </div>
-      <div className="py-2 gap-3 flex flex-col justify-center items-center">
-        <Button title={"Change name"} onClick={() => setModalOpen(true)} />
-        <Button title={"Log out"} onClick={() => logOut()} />
-      </div>
-
-      {message && (
-        <p
-          className={`mt-4 text-center ${
-            message.includes("Error") ? "text-red-500" : "text-green-500"
-          }`}
-        >
-          {message}
+    <div className="min-h-screen flex flex-col items-center px-4 py-6">
+      <header className="w-full max-w-md mb-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl shadow-lg p-8 text-white text-center">
+        <h2 className="text-3xl font-extrabold mb-2">
+          Welcome,{" "}
+          <span className="text-yellow-300">
+            {profile?.full_name || "Usuario"}
+          </span>
+          !
+        </h2>
+        <p className="text-indigo-100 font-medium">
+          Created at:{" "}
+          <span className="underline">
+            {profile ? new Date(profile.created_at).toLocaleDateString() : "—"}
+          </span>
         </p>
-      )}
+      </header>
+
+      <section className="bg-white max-w-md w-full rounded-3xl shadow-md p-8 text-center mb-20">
+        <p className="text-gray-700 mb-6">
+          {profile?.full_name
+            ? "Here you can track your tasks and projects progress."
+            : "Please complete your profile by entering your full name."}
+        </p>
+
+        <div className="mb-8">
+          <Stadistics stadistics={stadistics} />
+        </div>
+        <div className="flex flex-col gap-4 md:justify-center">
+          <Button
+            title="Change Name"
+            onClick={() => setModalOpen(true)}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-md px-6 py-3 transition"
+          />
+          <Button
+            title="Log Out"
+            onClick={() => logOut()}
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-xl shadow-md px-6 py-3 transition"
+          />
+        </div>
+
+        {message && (
+          <p
+            className={`mt-6 font-semibold ${
+              message.includes("Error") ? "text-red-500" : "text-green-500"
+            }`}
+          >
+            {message}
+          </p>
+        )}
+      </section>
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <ChangeName

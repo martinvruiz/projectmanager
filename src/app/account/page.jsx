@@ -31,28 +31,33 @@ export default function Account() {
         {user ? (
           <UserProfile />
         ) : (
-          <div className="w-full min-h-screen bg-gray-200 text-gray-800">
-            <div className="flex flex-col items-center w-full">
-              <h3 className="md:text-3xl text-xl font-bold">Log in</h3>
-              <div className="flex flex-col items-center">
+          <div className="h-full flex flex-col items-center justify-center px-4 py-12">
+            <div className="w-full max-w-md bg-white rounded-xl shadow-md p-8">
+              <h2 className="text-3xl font-extrabold text-center text-gray-900 mb-6">
+                Log in
+              </h2>
+
+              <div className="flex flex-col gap-4">
                 <input
                   type="text"
-                  className="border border-gray-300 bg-white rounded px-3 py-2 w-full my-2 min-w-xs"
+                  className="border border-gray-300 rounded-xl px-4 py-2 w-full bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+
                 <input
                   type="password"
-                  className="border border-gray-300 bg-white rounded px-3 py-2 w-full my-2 min-w-xs"
+                  className="border border-gray-300 rounded-xl px-4 py-2 w-full bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <div className="flex gap-2">
-                  <Button title={"Log in"} onClick={() => handleLogIn()} />
-                  <Link href={"/account/signup"}>
-                    <Button title={"Sign up"} />
+
+                <div className="flex flex-col md:flex-row justify-center gap-4 pt-4">
+                  <Button title="Log in" onClick={handleLogIn} />
+                  <Link href="/account/signup" className="w-full md:w-auto">
+                    <Button title="Sign up" />
                   </Link>
                 </div>
               </div>

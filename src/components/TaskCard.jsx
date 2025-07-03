@@ -1,39 +1,37 @@
 export default function TaskCard({ task }) {
+  const priorityColor =
+    task.priority === "high"
+      ? "bg-red-100 text-red-600"
+      : task.priority === "medium"
+      ? "bg-yellow-100 text-yellow-600"
+      : "bg-green-100 text-green-600";
+
+  const statusColor =
+    task.status === "done"
+      ? "bg-green-100 text-green-600"
+      : task.status === "in process"
+      ? "bg-yellow-100 text-yellow-600"
+      : "bg-red-100 text-red-600";
+
   return (
-    <div
-      className="bg-white hover:bg-gray-200 cursor-pointer shadow-md rounded-lg p-3 mb-2 flex flex-col md:flex-row items-center justify-between gap-4 text-sm sm:text-base md:min-w-2xl min-w-xs
-        transition-all duration-300 ease-out opacity-100 scale-100 animate-fadeIn"
-    >
-      <h4 className="font-semibold md:w-2/4 md:text-start">{task.name}</h4>
-      <div className="flex flex-row justify-between w-full">
-        <p className="text-gray-600 md:w-3/6 text-center">
+    <div className="bg-white border border-gray-200 hover:shadow-md transition-all duration-300 rounded-lg p-4 flex flex-col md:flex-row items-center justify-center md:justify-between text-center gap-4 w-full text-sm sm:text-base animate-fadeIn md:min-w-2xl min-w-xs">
+      <h4 className="font-semibold text-gray-800 w-2/5 truncate">
+        {task.name}
+      </h4>
+
+      <div className="flex gap-3 w-4/5 justify-end">
+        <span
+          className={`px-3 py-1 rounded-lg text-xs font-medium ${priorityColor}`}
+        >
           Priority:{" "}
-          <span
-            className={`font-medium ${
-              task.priority === "high"
-                ? "text-red-500"
-                : task.priority === "medium"
-                ? "text-yellow-500"
-                : "text-green-500"
-            }`}
-          >
-            {task.priority}
-          </span>
-        </p>
-        <p className="text-md text-gray-500">
-          Status:{" "}
-          <span
-            className={`font-medium ${
-              task.status === "done"
-                ? "text-green-500"
-                : task.status === "in process"
-                ? "text-yellow-500"
-                : "text-red-500"
-            }`}
-          >
-            {task.status}
-          </span>
-        </p>
+          {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
+        </span>
+
+        <span
+          className={`px-3 py-1 rounded-lg text-xs font-medium ${statusColor}`}
+        >
+          Status: {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
+        </span>
       </div>
     </div>
   );

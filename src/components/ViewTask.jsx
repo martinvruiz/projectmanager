@@ -1,46 +1,47 @@
 import Button from "./Button";
 
 export default function ViewTask({ task, editTask, deleteTask }) {
+  const priorityColor =
+    task.priority === "high"
+      ? "bg-red-100 text-red-600"
+      : task.priority === "medium"
+      ? "bg-yellow-100 text-yellow-600"
+      : "bg-green-100 text-green-600";
+
+  const statusColor =
+    task.status === "done"
+      ? "bg-green-100 text-green-600"
+      : task.status === "in process"
+      ? "bg-yellow-100 text-yellow-600"
+      : "bg-red-100 text-red-600";
+
   return (
-    <div className="w-full flex flex-col items-center">
-      <p className="md:text-lg text-gray-600 my-2 text-center">
+    <div className="w-full flex flex-col items-center space-y-4">
+      <p className="text-sm md:text-base text-gray-500">
         Created: {new Date(task.created_at).toLocaleDateString()}
       </p>
-      <div className="md:min-w-xs mx-auto flex flex-col items-center bg-white rounded-lg p-4">
-        <h3 className="text-2xl  font-semibold mb-2">{task.name}</h3>
-        <p className="text-gray-700 mb-2">{task.description}</p>
-        <p className="text-md text-gray-500">
-          Status:{" "}
+
+      <div className="w-full max-w-xl bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4 text-center">
+        <h3 className="text-2xl font-semibold text-gray-800">{task.name}</h3>
+        <p className="text-gray-700">{task.description}</p>
+
+        <div className="flex flex-wrap justify-center gap-4 mt-2">
           <span
-            className={`font-medium ${
-              task.status === "done"
-                ? "text-green-500"
-                : task.status === "in process"
-                ? "text-yellow-500"
-                : "text-red-500"
-            } text-center`}
+            className={`px-4 py-1 rounded-lg text-sm font-medium ${statusColor}`}
           >
-            {task.status}
+            Status: {task.status}
           </span>
-        </p>
-        <p className="text-gray-600 md:w-3/6 text-center">
-          Priority:{" "}
           <span
-            className={`font-medium ${
-              task.priority === "high"
-                ? "text-red-500"
-                : task.priority === "medium"
-                ? "text-yellow-500"
-                : "text-green-500"
-            } text-center`}
+            className={`px-4 py-1 rounded-lg text-sm font-medium ${priorityColor}`}
           >
-            {task.priority}
+            Priority: {task.priority}
           </span>
-        </p>
+        </div>
       </div>
-      <div className="flex flex-col items-center justify-center space-y-2">
-        <Button title={"Edit task"} onClick={editTask} />
-        <Button title={"Delete task"} onClick={deleteTask} />
+
+      <div className="flex flex-col items-center justify-center gap-3">
+        <Button title="Edit task" onClick={editTask} />
+        <Button title="Delete task" onClick={deleteTask} />
       </div>
     </div>
   );

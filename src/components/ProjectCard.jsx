@@ -1,13 +1,15 @@
 export default function ProjectCard({ project }) {
   return (
-    <div className="bg-white hover:bg-gray-200 shadow-md rounded-lg p-4 mb-2 md:min-w-xl">
-      <div className="flex items-center justify-between space-x-10">
-        <p className="md:text-md text-sm">
-          Created on: {new Date(project.created_at).toLocaleDateString()}
-        </p>
-        <h2 className="font-bold text-md md:text-2xl">{project.name}</h2>
-        <p className="md:text-md text-sm">
-          Last update: {new Date(project.updated_at).toLocaleDateString()}
+    <div className="bg-white hover:bg-gray-100 shadow rounded-2xl p-6 transition-colors duration-200 cursor-pointer md:min-w-3xl min-w-xs">
+      <div className="flex flex-col md:flex-row items-center justify-around gap-4">
+        <h2 className="font-semibold text-lg md:text-2xl text-gray-900">
+          {project.name}
+        </h2>
+        <p className="text-gray-600 text-sm md:text-base whitespace-nowrap">
+          Last update:{" "}
+          <span className="font-medium text-gray-800">
+            {new Date(project.updated_at).toLocaleDateString()}
+          </span>
         </p>
       </div>
     </div>
