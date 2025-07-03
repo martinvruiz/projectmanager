@@ -15,7 +15,7 @@ export default function TaskCard({ task }) {
 
   return (
     <div className="bg-white border border-gray-200 hover:shadow-md transition-all duration-300 rounded-lg p-4 flex flex-col md:flex-row items-center justify-center md:justify-between text-center gap-4 w-full text-sm sm:text-base animate-fadeIn md:min-w-2xl min-w-xs">
-      <h4 className="font-semibold text-gray-800 w-2/5 truncate">
+      <h4 className="font-semibold text-gray-800 w-full md:text-start">
         {task.name}
       </h4>
 
