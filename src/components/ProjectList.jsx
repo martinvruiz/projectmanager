@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCard";
 
 export default function ProjectList({ projectsList }) {
   return (
-    <ul className="list-none mt-4 p-0 flex flex-col items-center">
+    <ul className="list-none mt-4 p-0 flex flex-col items-center gap-1">
       <AnimatePresence>
         {projectsList.map((project) => (
           <motion.li
