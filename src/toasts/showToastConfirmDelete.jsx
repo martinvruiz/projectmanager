@@ -2,9 +2,9 @@ import { toast } from "react-toastify";
 
 export const toastConfirmDelete = (taskName, onConfirm) => {
   const ToastContent = ({ closeToast }) => (
-    <div className="flex flex-col gap-3 px-4 py-3">
+    <div className="flex flex-col gap-3 p-2">
       <p className="text-center">
-        ¿Quieres eliminar <strong>{taskName}</strong>?
+        Delete <strong>{taskName}</strong>?
       </p>
       <div className="flex gap-4 justify-center">
         <button
@@ -14,7 +14,7 @@ export const toastConfirmDelete = (taskName, onConfirm) => {
           }}
           className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition"
         >
-          Sí
+          Yes
         </button>
         <button
           onClick={closeToast}
@@ -33,5 +33,7 @@ export const toastConfirmDelete = (taskName, onConfirm) => {
     closeButton: false,
     draggable: false,
     pauseOnHover: false,
+    className:
+      "bg-white text-gray-800 rounded-lg shadow-md w-full max-w-[90vw] sm:max-w-md mt-2",
   });
 };
