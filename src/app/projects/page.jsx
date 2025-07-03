@@ -2,8 +2,7 @@
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import Navbar from "@/components/Navbar";
-import ProjectList from "@/components/ProjecList";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectList from "@/components/ProjectList";
 import { useStore } from "@/stores/useStore";
 import { showSuccessToast } from "@/toasts/showSuccesToast";
 import Link from "next/link";

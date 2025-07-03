@@ -1,6 +1,6 @@
 export default function ProjectCard({ project }) {
   return (
-    <div className="bg-white hover:bg-gray-100 shadow rounded-2xl p-6 transition-colors duration-200 cursor-pointer">
+    <div className="bg-white hover:bg-gray-100 shadow rounded-2xl p-6 transition-colors duration-200 cursor-pointer md:min-w-3xl min-w-xs">
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-gray-600 text-sm md:text-base whitespace-nowrap">
           Created:{" "}
