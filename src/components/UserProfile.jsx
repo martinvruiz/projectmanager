@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { useStadistics } from "@/hooks/useStadistics";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function UserProfile() {
   const { profile, loading, updateProfile } = useProfile();
@@ -41,7 +42,14 @@ export default function UserProfile() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-4 py-6">
+    <motion.div
+      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+      transition={{ duration: 0.3 }}
+      layout
+      className="min-h-screen flex flex-col items-center px-4 py-6 pb-24"
+    >
       <header className="w-full max-w-md mb-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl shadow-lg p-8 text-white text-center">
         <h2 className="text-3xl font-extrabold mb-2">
           Welcome,{" "}
@@ -58,7 +66,7 @@ export default function UserProfile() {
         </p>
       </header>
 
-      <section className="bg-white max-w-md w-full rounded-3xl shadow-md p-8 text-center mb-20">
+      <section className="bg-white max-w-md w-full rounded-3xl shadow-md p-8 text-center">
         <p className="text-gray-700 mb-6">
           {profile?.full_name
             ? "Here you can track your tasks and projects progress."
@@ -100,6 +108,6 @@ export default function UserProfile() {
           onClickButton={() => handleUpdateProfile()}
         />
       </Modal>
-    </div>
+    </motion.div>
   );
 }

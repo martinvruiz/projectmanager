@@ -30,7 +30,7 @@ export default function Modal({ children, onClose, isOpen }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.3 }}
             onClick={(e) => e.stopPropagation()}
             tabIndex={-1}
             autoFocus

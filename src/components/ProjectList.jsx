@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCard";
 
 export default function ProjectList({ projectsList }) {
   return (
-    <ul className="list-none mt-4 p-0 flex flex-col items-center gap-1">
+    <ul className="list-none mt-4 p-0 flex flex-col items-center gap-2">
       <AnimatePresence>
         {projectsList.map((project) => (
           <motion.li
@@ -12,7 +12,7 @@ export default function ProjectList({ projectsList }) {
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.3 }}
             layout
             className="cursor-pointer"
           >
