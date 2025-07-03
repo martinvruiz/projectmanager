@@ -54,7 +54,7 @@ export default function Account() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <div className="flex flex-col md:flex-row justify-center gap-4 pt-4">
+                <div className="flex flex-col justify-center gap-4 pt-4">
                   <Button title="Log in" onClick={handleLogIn} />
                   <Link href="/account/signup" className="w-full md:w-auto">
                     <Button title="Sign up" />
