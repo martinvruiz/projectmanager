@@ -10,7 +10,7 @@ export default function EditTask({
 }) {
   return (
     <div className="w-full max-w-lg mx-auto p-2 bg-white rounded-2xl">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col items-center gap-4">
         <h3 className="text-xl font-semibold text-center text-gray-800">
           Edit Task
         </h3>
@@ -31,8 +31,11 @@ export default function EditTask({
           className="border border-gray-300 rounded-lg px-4 py-2 w-full text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 min-w-3xs"
         />
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="status" className="text-sm font-medium text-gray-700">
+        <div className="flex flex-col gap-1 w-full">
+          <label
+            htmlFor="status"
+            className="text-sm font-medium text-gray-700 w-full"
+          >
             Status:
           </label>
           <select
@@ -40,7 +43,7 @@ export default function EditTask({
             id="status"
             value={editTask.status}
             onChange={onChangeStatus}
-            className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 min-w-3xs"
+            className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-full"
           >
             <option value="pending">Pending</option>
             <option value="in process">In process</option>
@@ -48,7 +51,7 @@ export default function EditTask({
           </select>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 w-full">
           <label
             htmlFor="priority"
             className="text-sm font-medium text-gray-700"
